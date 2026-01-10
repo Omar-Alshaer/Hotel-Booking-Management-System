@@ -1,10 +1,9 @@
-
 # Hotel Booking Management System
 
 <p align="center">
-  <img src="https://github.com/Omar-Alshaer/Hotel-Booking-Management-System/blob/main/hotel.png?raw=true" alt="Hotel Management System" width="200" height="200"/>
-  <br>
-  <strong>Hotel Booking Management System</strong>
+<img width="180" alt="Hotel Logo" src="https://github.com/Omar-Alshaer/Hotel-Booking-Management-System/blob/main/hotel.png?raw=true">
+<br>
+<em>Hotel Booking Management System</em>
 </p>
 
 ## 📋 Project Overview
@@ -24,82 +23,127 @@
 - 📊 **Reports** - Merge Sort (Reservations/Revenue/Occupancy Rate)
 
 ### **Production Features**
-- MongoDB Atlas (5 collections: guests/rooms/reservations/serviceRequests/billing)
+- MongoDB Atlas (5 collections)
 - Auto-ID generation (G0001/R0001/RES0001/SR0001/B0001)
 - Date validation (future dates + check-out > check-in)
-- Real-time room assignment + auto-charging
+- Real-time room assignment + auto-charging ($25/service)
 - Professional GUI (7 panels + FormBuilder + JXDatePicker)
 
 ---
 
-## 🏗️ Data Structures Deep Dive
+## 🏗️ Data Structures Implementation
 
-| Module | Structure | Key Features | Complexity |
-|--------|-----------|--------------|------------|
-| **Guests** | **AVL Tree** | Self-balancing + Name search + Rotations (LL/LR/RL/RR) | O(log n) |
-| **Rooms** | **Singly Linked List** | Tail insertion + Availability tracking | O(1) insert |
-| **Reservations** | **Singly Linked List** | Head insertion + Merge Sort by date | O(1) add |
-| **Services** | **Circular Queue** | FIFO + Fixed 100 capacity + Overflow protection | O(1) ops |
-| **Billing** | **HashMap** | Auto-create + Real-time updates | O(1) lookup |
-
----
-
-## 🔌 MongoDB Schema (5 Collections)
-
-```
-guests: {guestID, name, contact, address, bookingHistory[], paymentHistory[]}
-rooms: {roomID, type, capacity, isAvailable, pricePerNight}
-reservations: {resID, guestID, roomID, checkIn, checkOut, status, nights}
-serviceRequests: {reqID, guestID, type, date, status}
-billing: {billID, guestID, roomCharges, serviceCharges, total, paid, balance}
-```
+| Module | Structure | Key Features | Time Complexity |
+|--------|-----------|--------------|-----------------|
+| **Guests** | **AVL Tree** | Self-balancing + Name/ID search + Rotations | **O(log n)** |
+| **Rooms** | **Linked List** | Tail insert + Availability tracking | **O(1)** insert |
+| **Reservations** | **Linked List** | Head insert + Merge Sort | **O(1)** add |
+| **Services** | **Circular Queue** | FIFO + 100 capacity + Overflow protection | **O(1)** ops |
+| **Billing** | **HashMap** | Auto-create + Real-time balance | **O(1)** lookup |
 
 ---
 
-## 🎨 GUI Highlights
-```
-✅ 1500x800 responsive design
-✅ Custom FormBuilder w/ placeholders
-✅ 7 CardLayout panels
-✅ Professional Segoe UI styling
-✅ Hover effects + focus animations
-✅ Real-time validation + popups
-✅ Logo integration (hotel.png)
-```
+
+
+## 💾 MongoDB Schema
+
+| Collection | Key Fields | Sample Document |
+|------------|------------|-----------------|
+| `guests` | `guestID`, `name`, `contactInfo`, `address[]` | `{"G0001", "Ahmed Hassan", "0123456789", "Cairo"}` |
+| `rooms` | `roomID`, `roomType`, `isAvailable`, `price` | `{"R0001", "Single", true, 150.0}` |
+| `reservations` | `resID`, `guestID`, `checkIn`, `status` | `{"RES0001", "G0001", "2026-01-15", "Confirmed"}` |
+| `serviceRequests` | `reqID`, `guestID`, `serviceType`, `status` | `{"SR0001", "G0001", "Laundry", "Pending"}` |
+| `billing` | `billID`, `guestID`, `total`, `balance` | `{"B0001", "G0001", 475.0, 275.0}` |
+
+**Features:** Auto-sync • Startup load • Real-time CRUD
+
 
 ---
 
-## 🚀 Production-Ready Setup
+## 🛠️ Manual Setup
 
+### 📁 Required JARs
+```
+swingx-all-1.6.5-1.jar          (GUI DatePicker)
+mongodb-driver-core-5.1.1.jar   (MongoDB Core)
+bson-5.1.1.jar                  (BSON)
+mongodb-driver-sync-5.1.1.jar   (Sync Operations)
+```
+
+### ⚡ Compile & Run Commands
+
+**Windows:**
+```cmd
+javac -cp ".;lib\*" *.java
+java -cp ".;lib\*" Main
+```
+
+**Linux/Mac:**
 ```bash
-# 1. Clone & Configure
-git clone your-repo
-# Update DataBase.java MongoDB URI
+javac -cp ".:lib/*" *.java
+java -cp ".:lib/*" Main
+```
 
-# 2. Dependencies (Maven)
-mongodb-driver-sync:4.x.x
-swingx-all:1.6.5-1
+---
+ 
 
-# 3. Run
-java Main
+## 📂 Project Structure
+```
+Hotel-Booking-Management-System/
+├── hotel.png                 (Logo)
+├── README.md                 (Documentation)
+├── src/                      (Source Files)
+│   ├── Main.java
+│   ├── Guest.java            (AVL Tree)
+│   ├── Room.java             (Linked List)
+│   ├── Reservation.java      (Linked List + Merge Sort)
+│   ├── ServiceRequest.java   (Circular Queue)
+│   ├── Billing.java          (HashMap)
+│   ├── ReportGenerator.java  (Merge Sort Reports)
+│   ├── HotelManagementSystem.java (Main Controller)
+│   ├── HotelGUI.java         (Complete GUI)
+│   └── DataBase.java         (MongoDB Connection)
+└── lib/                      (JAR Libraries)
+    ├── swingx-all-1.6.5-1.jar
+    ├── mongodb-driver-core-5.1.1.jar
+    ├── bson-5.1.1.jar
+    └── mongodb-driver-sync-5.1.1.jar
+```
+
+## 🎨 Professional Swing GUI
+
+<p align="center">
+  <img src="GUI.png?raw=true" alt="Hotel Booking Management System" width="1000"/>
+  <br>
+  <em>• 7 Management Modules • CardLayout Navigation • Custom FormBuilder • JXDatePicker</em>
+</p>
+
+
+---
+
+## 📈 Performance Summary
+
+```
+✅ Guest Search: O(log n) - AVL Tree
+✅ Billing Access: O(1) - HashMap
+✅ Service Queue: O(1) - Circular Queue
+✅ Reports: O(n log n) - Merge Sort
+✅ MongoDB: Real-time sync
 ```
 
 ---
 
-## 📈 Verified Performance
-
-```
-Guest Search: O(log n) ✓ AVL Tree
-Billing Lookup: O(1) ✓ HashMap  
-Service Queue: O(1) ✓ Circular Queue
-Report Sort: O(n log n) ✓ Merge Sort
-MongoDB Sync: Startup only ✓
-```
+## 🔮 Key Validations
+- ✅ Future check-in dates only
+- ✅ Check-out > check-in
+- ✅ Room availability check
+- ✅ Guest existence validation
+- ✅ Number format handling
+- ✅ Empty field prevention
 
 ---
 
-## 🎓 Academic Excellence
+## 🎓 Academic Context
 
-**CSE111 Data Structures (Fall 2025)**  
-**Alamein International University**  
-**Grade A Implementation:** All required structures + bonus MongoDB + GUI
+**Course:** CSE111 - Data Structures (Fall 2025)  
+**University:** Alamein International University  
