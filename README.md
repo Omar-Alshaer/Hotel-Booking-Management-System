@@ -12,6 +12,15 @@
 
 ---
 
+## 👥 Project Team
+
+This project was developed by:
+
+- Shaimaa Mohamed Kotit
+- Omar Reda Elshaer
+
+---
+
 ## ✨ Complete Feature Set
 
 ### **Management Modules**
